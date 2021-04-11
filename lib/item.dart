@@ -6,42 +6,41 @@ class Item extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
+      height: 200,
+      width: 100,
       padding: EdgeInsets.all(10),
-      child: Material(
-        borderRadius: BorderRadius.circular(9),
-        elevation: 5,
-        child: Container(
-          width: 10,
-          // height: MediaQuery.of(context).size.height * 0.5,
+      child: Card(
+        //width: 10,
+        // height: MediaQuery.of(context).size.height * 0.5,
+        elevation: 8,
 
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                height: 20,
+        //padding: const EdgeInsets.all(10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              height: 20,
+            ),
+            Icon(
+              Icons.person,
+              color: green,
+              size: 50,
+            ),
+            Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text('name: xxxxx'),
+                  Text('Phone: 05xxxxxxxx'),
+                  Text('id num: 1xxxxx'),
+                  Text("branch: xxxxxx"),
+                ],
               ),
-              Icon(
-                Icons.person,
-                color: green,
-                size: 50,
-              ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text('name: xxxxx'),
-                    Text('Phone: 05xxxxxxxx'),
-                    Text('id num: 1xxxxx'),
-                    Text("branch: xxxxxx"),
-                  ],
-                ),
-              ),
-              Container(
-                height: 20,
-              ),
-            ],
-          ),
+            ),
+            Container(
+              height: 20,
+            ),
+          ],
         ),
       ),
     );

@@ -94,7 +94,11 @@ class UserPage extends ConsumerWidget {
                 margin: EdgeInsets.all(20),
                 // padding: EdgeInsets.all(20),
                 child: GridView.count(
-                  crossAxisCount: w < h ? 3 : 5,
+                  crossAxisCount: w < h
+                      ? 3
+                      : h / w <= 13 / 9
+                          ? 2
+                          : 5,
                   children: [
                     Item(),
                     Item(),
