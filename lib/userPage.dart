@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_shop/item.dart';
+import 'package:parse_server_sdk/parse_server_sdk.dart';
+import 'CDropdownMenu.dart';
 import 'main.dart';
 
 final programsProvider = StateProvider<List<ParseObject>>((ref) => null);
 
 class UserPage extends ConsumerWidget {
-  Future<void> _showMyDialog(context) async {
+  Future<void> _showMyDialog(context, List<ParseObject> programs) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -431,7 +433,7 @@ class UserPage extends ConsumerWidget {
             padding: const EdgeInsets.all(30.0),
             child: FloatingActionButton(
               onPressed: () {
-                _showMyDialog(context);
+                _showMyDialog(context, programs);
               },
               backgroundColor: green,
               child: Icon(Icons.add),
