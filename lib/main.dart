@@ -1,26 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_shop/DB/userRequests.dart';
 import 'package:flutter_shop/signInPage.dart';
-//import 'package:riverpod/all.dart';
+import 'package:parse_server_sdk/parse_server_sdk.dart';
 import 'package:riverpod/riverpod.dart';
 import 'userPage.dart';
-import 'startNewUser.dart';
 
 void main() => runApp(ProviderScope(child: MyApp()));
+
+const appId = "OzrokmU22cgyApcIL7XMkNvADiuxuro1B5SRJ8Yy";
+const serverUrl = "https://parseapi.back4app.com/";
+const clientKey = "yQXy4KHzCutNlZOtToTsRU7AsHXqMts6oPaloj58";
 
 const Color yallow = Color.fromRGBO(255, 202, 40, 1);
 const Color green = Color.fromRGBO(46, 125, 50, 1);
 const Color darkgray = Color.fromRGBO(97, 97, 97, 1);
 const Color gray = Color.fromRGBO(243, 243, 243, 1);
+final connectionProvider = FutureProvider<Parse>(
+  (ref) async => await Parse().initialize(
+    appId,
+    serverUrl,
+    clientKey: clientKey,
+    //fileDirectory: (await getExternalStorageDirectory()).path,
+  ),
+);
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, watch) {
     // TODO: implement build
     return MaterialApp(
       title: "my shop",
       theme: ThemeData(primarySwatch: Colors.green),
-      home: MyHomePage(),
+      home: watch(connectionProvider).when(
+        data: (parse) {
+          getBranch().then((value) {
+            print(" branch = " + value.toString());
+            context.read(branchProvider).state = value;
+          });
+          getEmployeeRole().then((valu) {
+            print(" role = " + valu.toString());
+            context.read(roleProvider).state = valu;
+          });
+          return MyHomePage();
+        },
+        loading: () =>
+            Container(child: Center(child: CircularProgressIndicator())),
+        error: (e, stack) {
+          return Scaffold(
+              body: Container(child: Center(child: Text(e.toString()))));
+        },
+      ),
       builder: (context, child) {
         return Directionality(
           textDirection: TextDirection.rtl,
@@ -36,12 +66,6 @@ final pageProvider = StateProvider<int>((ref) {
 });
 
 class MyHomePage extends ConsumerWidget {
-  // void selectPage(BuildContext ctx) {
-  //   Navigator.of(ctx).push(MaterialPageRoute(builder: (_) {
-  //     return MyHomePage();
-  //   }));
-  // }
-
   @override
   Widget build(BuildContext context, watch) {
     final _pageProvider = watch(pageProvider).state;

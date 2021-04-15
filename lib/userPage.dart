@@ -5,10 +5,12 @@ import 'package:parse_server_sdk/parse_server_sdk.dart';
 import 'CDropdownMenu.dart';
 import 'main.dart';
 
-final programsProvider = StateProvider<List<ParseObject>>((ref) => null);
+final branchProvider = StateProvider<List<ParseObject>>((ref) => null);
+final roleProvider = StateProvider<List<ParseObject>>((ref) => null);
 
 class UserPage extends ConsumerWidget {
-  Future<void> _showMyDialog(context, List<ParseObject> programs) async {
+  Future<void> _showMyDialog(
+      context, List<ParseObject> branch, List<ParseObject> role) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -132,12 +134,12 @@ class UserPage extends ConsumerWidget {
                     height: 70,
                     width: 300,
                     child: CDropdown(
-                        selectedState: programSelectedProvider,
-                        options: programs == null
+                        selectedState: roleSelectedProvider,
+                        options: role == null
                             ? null
-                            : programs
+                            : role
                                 .map((parsepbject) =>
-                                    parsepbject.get("name").toString())
+                                    parsepbject.get("Role").toString())
                                 .toList()),
                   ),
                 ]),
@@ -295,8 +297,15 @@ class UserPage extends ConsumerWidget {
                     // height: 70,
                     // width: 600,
                     child: Container(
-                      height: 70,
-                      // child: CDropdown(),
+                      // height: 70,
+                      child: CDropdown(
+                          selectedState: branchSelectedProvider,
+                          options: branch == null
+                              ? null
+                              : branch
+                                  .map((parsepbject) =>
+                                      parsepbject.get("branch").toString())
+                                  .toList()),
                     ),
                   ),
                 ]),
@@ -341,7 +350,9 @@ class UserPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, watch) {
-    final programs = watch(programsProvider).state;
+    final role = watch(roleProvider).state;
+    final branch = watch(branchProvider).state;
+
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
     final _pageProvider = watch(pageProvider).state;
@@ -433,7 +444,7 @@ class UserPage extends ConsumerWidget {
             padding: const EdgeInsets.all(30.0),
             child: FloatingActionButton(
               onPressed: () {
-                _showMyDialog(context, programs);
+                _showMyDialog(context, branch, role);
               },
               backgroundColor: green,
               child: Icon(Icons.add),
@@ -444,5 +455,3 @@ class UserPage extends ConsumerWidget {
     );
   }
 }
-
-class CDropdown {}

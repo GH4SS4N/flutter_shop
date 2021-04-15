@@ -2,15 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'main.dart';
-//import 'package:namaa_employee/pages/employee/searchpage/search.dart';
-//import 'package:parse_server_sdk/parse_server_sdk.dart';
 
-//import '../../main.dart';
-
-// final storeTypeSelectedProvider = StateProvider<String>((ref) => null);
-final countrySelectedProvider = StateProvider<String>((ref) => "asdf");
-// final citySelectedProvider = StateProvider<String>((ref) => "جدة");
-final programSelectedProvider = StateProvider<String>((ref) => null);
+final roleSelectedProvider = StateProvider<String>((ref) => "zxdc");
+final branchSelectedProvider = StateProvider<String>((ref) => "asc");
 
 class CDropdown extends ConsumerWidget {
   final StateProvider selectedState;
