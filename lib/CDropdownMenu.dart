@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'main.dart';
 
-final roleSelectedProvider = StateProvider<String>((ref) => "zxdc");
-final branchSelectedProvider = StateProvider<String>((ref) => "asc");
+final roleSelectedProvider = StateProvider<String>((ref) => null);
+final branchSelectedProvider = StateProvider<String>((ref) => null);
 
 class CDropdown extends ConsumerWidget {
   final StateProvider selectedState;
