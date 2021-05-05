@@ -9,7 +9,7 @@ import 'main.dart';
 class SignInPage extends ConsumerWidget {
   final _formKey = GlobalKey<FormState>();
   String phoneNumber;
-  String password;
+  String _password;
 
   Future<void> _actionperformed(
       BuildContext context, phoneNumber, password) async {
@@ -17,7 +17,7 @@ class SignInPage extends ConsumerWidget {
     // var response = await user.signUp(allowWithoutEmail: true);
     // user = response.result;
     // print("USER ===== : " + user.toString());
-
+    print(phoneNumber + password);
     if (_formKey.currentState.validate()) {
       var user = ParseUser(phoneNumber, password, null);
 
@@ -135,7 +135,8 @@ class SignInPage extends ConsumerWidget {
                         }
                       },
                       onChanged: (value) {
-                        password = value;
+                        _password = value;
+                        print(_password);
                       },
                       // inputFormatters: [
                       //   WhitelistingTextInputFormatter.digitsOnly
@@ -147,7 +148,7 @@ class SignInPage extends ConsumerWidget {
                     child: FlatButton(
                         color: green,
                         onPressed: () {
-                          _actionperformed(context, phoneNumber, password);
+                          _actionperformed(context, phoneNumber, _password);
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),

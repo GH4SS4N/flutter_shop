@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_shop/DB/userRequests.dart';
 import 'package:flutter_shop/item.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 import 'CDropdownMenu.dart';
@@ -11,8 +12,32 @@ final roleProvider = StateProvider<List<ParseObject>>((ref) => null);
 class UserPage extends ConsumerWidget {
   final _formKey = GlobalKey<FormState>();
 
-  void _actionperformed(BuildContext context) {
+  String phoneNumber;
+  String name;
+  String employeeId;
+  String type;
+  String password;
+  String formLink;
+  String formResultLink;
+  String branch;
+
+  void _actionperformed(BuildContext context, phoneNumber, name, employeeId,
+      password, formLink, formResultLink) {
     if (_formKey.currentState.validate()) {
+      signupEmployee(phoneNumber, name, employeeId, type, password, formLink,
+              formResultLink, branch)
+          .then((value) {
+        print("ghdjfh  ==== " + value.toString());
+      });
+      print(phoneNumber +
+          name +
+          employeeId +
+          context.read(roleSelectedProvider).state.toString() +
+          password +
+          formLink +
+          formResultLink +
+          context.read(branchSelectedProvider).state.toString());
+
       Navigator.of(context).pop();
 
       //context.read(pageProvider).state = 2;
@@ -72,7 +97,7 @@ class UserPage extends ConsumerWidget {
                         ),
                         validator: (val) {
                           if (val.length == 0) {
-                            return "g";
+                            return "can't be empty";
                           } else if (val.contains(RegExp(r'[A-Za-z]'))) {
                             return "should have only numbers ";
                           } else if (val.length != 10) {
@@ -80,6 +105,9 @@ class UserPage extends ConsumerWidget {
                           } else {
                             return null;
                           }
+                        },
+                        onChanged: (value) {
+                          phoneNumber = value;
                         },
                         // inputFormatters: [
                         //   WhitelistingTextInputFormatter.digitsOnly
@@ -105,10 +133,13 @@ class UserPage extends ConsumerWidget {
                         ),
                         validator: (val) {
                           if (val.length == 0) {
-                            return "Email cannot be empty";
+                            return "name cannot be empty";
                           } else {
                             return null;
                           }
+                        },
+                        onChanged: (value) {
+                          name = value;
                         },
                         // inputFormatters: [
                         //   WhitelistingTextInputFormatter.digitsOnly
@@ -136,10 +167,15 @@ class UserPage extends ConsumerWidget {
                         ),
                         validator: (val) {
                           if (val.length == 0) {
-                            return "Email cannot be empty";
+                            return "cannot be empty";
+                          } else if (val.contains(RegExp(r'[A-Za-z]'))) {
+                            return "should have only numbers ";
                           } else {
                             return null;
                           }
+                        },
+                        onChanged: (value) {
+                          employeeId = value;
                         },
                         // inputFormatters: [
                         //   WhitelistingTextInputFormatter.digitsOnly
@@ -153,13 +189,15 @@ class UserPage extends ConsumerWidget {
                       // height: 70,
                       width: 300,
                       child: new CDropdown(
-                          selectedState: roleSelectedProvider,
-                          options: role == null
-                              ? ["iuoiu", 'hghgh']
-                              : role
-                                  .map((parsepbjec) =>
-                                      parsepbjec.get("Role").toString())
-                                  .toList()),
+                        selectedState: roleSelectedProvider,
+                        options: role == null
+                            ? ["iuoiu", 'hghgh']
+                            : role
+                                .map((parsepbjec) =>
+                                    parsepbjec.get("Role").toString())
+                                .toList(),
+                        type: 1,
+                      ),
                     ),
                   ]),
                   Row(
@@ -191,10 +229,13 @@ class UserPage extends ConsumerWidget {
                         ),
                         validator: (val) {
                           if (val.length == 0) {
-                            return "Email cannot be empty";
+                            return "password cannot be empty";
                           } else {
                             return null;
                           }
+                        },
+                        onChanged: (value) {
+                          password = value;
                         },
                         // inputFormatters: [
                         //   WhitelistingTextInputFormatter.digitsOnly
@@ -221,10 +262,13 @@ class UserPage extends ConsumerWidget {
                         ),
                         validator: (val) {
                           if (val.length == 0) {
-                            return "Email cannot be empty";
+                            return "password cannot be empty";
                           } else {
                             return null;
                           }
+                        },
+                        onChanged: (value) {
+                          password = value;
                         },
                         // inputFormatters: [
                         //   WhitelistingTextInputFormatter.digitsOnly
@@ -260,10 +304,13 @@ class UserPage extends ConsumerWidget {
                         ),
                         validator: (val) {
                           if (val.length == 0) {
-                            return "Email cannot be empty";
+                            return "cannot be empty";
                           } else {
                             return null;
                           }
+                        },
+                        onChanged: (value) {
+                          formLink = value;
                         },
                         // inputFormatters: [
                         //   WhitelistingTextInputFormatter.digitsOnly
@@ -289,10 +336,13 @@ class UserPage extends ConsumerWidget {
                         ),
                         validator: (val) {
                           if (val.length == 0) {
-                            return "Email cannot be empty";
+                            return "cannot be empty";
                           } else {
                             return null;
                           }
+                        },
+                        onChanged: (value) {
+                          formResultLink = value;
                         },
                         // inputFormatters: [
                         //   WhitelistingTextInputFormatter.digitsOnly
@@ -318,13 +368,15 @@ class UserPage extends ConsumerWidget {
                       child: Container(
                         // height: 70,
                         child: new CDropdown(
-                            selectedState: branchSelectedProvider,
-                            options: branch == null
-                                ? ["hjk", "hkjh"]
-                                : branch
-                                    .map((parsepbject) =>
-                                        parsepbject.get("branch").toString())
-                                    .toList()),
+                          selectedState: branchSelectedProvider,
+                          options: branch == null
+                              ? ["hjk", "hkjh"]
+                              : branch
+                                  .map((parsepbject) =>
+                                      parsepbject.get("branch").toString())
+                                  .toList(),
+                          type: 2,
+                        ),
                       ),
                     ),
                   ]),
@@ -339,7 +391,8 @@ class UserPage extends ConsumerWidget {
                         child: FlatButton(
                           height: 59,
                           onPressed: () {
-                            _actionperformed(context);
+                            _actionperformed(context, phoneNumber, name,
+                                employeeId, password, formLink, formResultLink);
                           },
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
