@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_shop/DB/userRequests.dart';
@@ -65,10 +67,29 @@ final pageProvider = StateProvider<int>((ref) {
   return 1;
 });
 
+final userProvider = StateProvider<ParseUser>((ref) {
+  return null;
+});
+
 class MyHomePage extends ConsumerWidget {
+  //var user = ParseUser.currentUser();
   @override
   Widget build(BuildContext context, watch) {
     final _pageProvider = watch(pageProvider).state;
+    final user = watch(userProvider).state;
+    Widget body = SignInPage();
+
+    switch (user) {
+      case null:
+        print('oh yeah');
+        //updateReminders(context);
+        break;
+
+      default:
+        print("user =-=-=-=-=-" + user.toString());
+        body = UserPage();
+    }
+
     // TODO: implement build
     return Scaffold(
         appBar: AppBar(
@@ -92,6 +113,6 @@ class MyHomePage extends ConsumerWidget {
                     TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
               ),
             )),
-        body: _pageProvider == 1 ? SignInPage() : UserPage());
+        body: body);
   }
 }

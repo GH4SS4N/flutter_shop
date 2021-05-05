@@ -1,15 +1,43 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_shop/DB/userRequests.dart';
 import 'package:flutter_shop/userPage.dart';
+import 'package:parse_server_sdk/parse_server_sdk.dart';
 import 'main.dart';
 
 class SignInPage extends ConsumerWidget {
   final _formKey = GlobalKey<FormState>();
+  String phoneNumber;
+  String password;
 
-  void _actionperformed(BuildContext context) {
+  Future<void> _actionperformed(
+      BuildContext context, phoneNumber, password) async {
+    // var user = ParseUser("0580000000", "UJ0443", null);
+    // var response = await user.signUp(allowWithoutEmail: true);
+    // user = response.result;
+    // print("USER ===== : " + user.toString());
+
     if (_formKey.currentState.validate()) {
-      context.read(pageProvider).state = 2;
+      var user = ParseUser(phoneNumber, password, null);
+
+      var response = await user.login().then((value) {
+        if (value == null) {
+          print("null +++ " + value.toString());
+        } else {
+          print("user ====== " + value.result.toString());
+          context.read(userProvider).state = value.result;
+          context.read(pageProvider).state = 2;
+        }
+      });
+      print("@@@@@@@@@@@@@@@@@@@");
+      print(response);
+      // if (response.success) {
+      //   print(" success success success success");
+
+      //   print(response.result);
+      // }
+
       //createDonation(donor, program, wireNumber, amount, note);
     }
   }
@@ -74,6 +102,9 @@ class SignInPage extends ConsumerWidget {
                           return null;
                         }
                       },
+                      onChanged: (value) {
+                        phoneNumber = value;
+                      },
                       // inputFormatters: [
                       //   WhitelistingTextInputFormatter.digitsOnly
                       // ],
@@ -103,6 +134,9 @@ class SignInPage extends ConsumerWidget {
                           return null;
                         }
                       },
+                      onChanged: (value) {
+                        password = value;
+                      },
                       // inputFormatters: [
                       //   WhitelistingTextInputFormatter.digitsOnly
                       // ],
@@ -113,7 +147,7 @@ class SignInPage extends ConsumerWidget {
                     child: FlatButton(
                         color: green,
                         onPressed: () {
-                          _actionperformed(context);
+                          _actionperformed(context, phoneNumber, password);
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),

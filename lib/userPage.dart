@@ -58,6 +58,8 @@ class UserPage extends ConsumerWidget {
                       height: 100,
                       width: 300,
                       child: TextFormField(
+                        maxLength: 10,
+                        maxLengthEnforced: true,
                         decoration: new InputDecoration(
                           suffixIcon: Icon(Icons.phone_iphone),
                           labelText: "رقم الجوال",
@@ -70,7 +72,11 @@ class UserPage extends ConsumerWidget {
                         ),
                         validator: (val) {
                           if (val.length == 0) {
-                            return "Email cannot be empty";
+                            return "g";
+                          } else if (val.contains(RegExp(r'[A-Za-z]'))) {
+                            return "should have only numbers ";
+                          } else if (val.length != 10) {
+                            return "should have 10 numbers ";
                           } else {
                             return null;
                           }
