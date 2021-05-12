@@ -435,7 +435,7 @@ class UserPage extends ConsumerWidget {
       // barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('انشاء حساب موضف جديد'),
+          //title: Text('انشاء حساب موضف جديد'),
           content: SingleChildScrollView(
               child: Form(
             key: _formKey,
@@ -444,146 +444,131 @@ class UserPage extends ConsumerWidget {
               //height: 600,
               width: 700,
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
+                  // Container(
+                  //   padding: EdgeInsets.all(10),
+                  //   height: 70,
+                  //   width: 300,
+                  //   child: Text(
+                  //     'انشاء حساب موضف جديد',
+                  //     style: TextStyle(fontSize: 35, color: green),
+                  //   ),
+                  // ),
+                  Container(
+                    padding: EdgeInsets.all(10),
+                    height: 70,
+                    width: 300,
+                    child: Text(
+                      "معلومات الحسابات",
+                      style: TextStyle(fontSize: 35, color: green),
+                    ),
+                  ),
                   Icon(
-                    Icons.person_add,
+                    Icons.person,
                     size: 60,
                     color: green,
                   ),
-                  Row(
-                    children: [
-                      Text(
-                        "معلومات الحسابات",
-                        style: TextStyle(fontSize: 35, color: green),
-                      ),
-                    ],
-                  ),
+
                   // name - phone number ==================================
-                  Row(children: [
-                    Container(
+                  Container(
+                    //color: darkgray,
+                    padding: EdgeInsets.all(10),
+                    height: 40,
+                    width: 300,
+                    child: Text("رقم الجوال: " + "0588888888"),
+                  ),
+                  // Spacer(),
+                  Container(
                       //color: darkgray,
                       padding: EdgeInsets.all(10),
-                      height: 100,
+                      height: 40,
                       width: 300,
-                      child: Text("رقم الجوال: " + "0588888888"),
-                    ),
-                    Spacer(),
-                    Container(
-                        //color: darkgray,
-                        padding: EdgeInsets.all(10),
-                        height: 100,
-                        width: 300,
-                        child: Text("اسم الموضف: " + "dc")),
-                  ]),
+                      child: Text("اسم الموضف: " + "dc")),
                   // imployee id num drope dpwn =============================================
-                  Row(children: [
-                    Container(
-                        //color: darkgray,
-                        padding: EdgeInsets.all(10),
-                        height: 100,
-                        width: 300,
-                        child: Text("الرقم الوضيفي: " + "zxc")),
-                    Spacer(),
-                    Container(
-                        //color: darkgray,
-                        padding: EdgeInsets.all(10),
-                        height: 70,
-                        width: 300,
-                        child: Text("kind ")),
-                  ]),
-                  Row(
-                    children: [
-                      Text(
-                        "كلمة المرور",
-                        style: TextStyle(fontSize: 35, color: green),
-                      ),
-                    ],
-                  ),
-                  // passwords =========================================
-                  Row(children: [
-                    Container(
-                        //color: darkgray,
-                        padding: EdgeInsets.all(10),
-                        height: 100,
-                        width: 300,
-                        child: Text("كلمة المرور :" + "kjhkj")),
-                    Spacer(),
-                    Container(
+                  Container(
                       //color: darkgray,
                       padding: EdgeInsets.all(10),
-                      height: 100,
+                      height: 40,
                       width: 300,
-                      child: Text(""),
-                    ),
-                  ]),
-                  Row(
-                    children: [
-                      Text(
-                        "التقييم",
-                        style: TextStyle(fontSize: 35, color: green),
-                      ),
-                    ],
-                  ),
-                  // http reveiw and results ========================================
-                  Row(children: [
-                    Container(
-                        //color: darkgray,
-                        padding: EdgeInsets.all(10),
-                        height: 100,
-                        width: 300,
-                        child: Text("رابط صفحة التقييم :" + "ghfgh")),
-                    Spacer(),
-                    Container(
-                        //color: darkgray,
-                        padding: EdgeInsets.all(10),
-                        height: 100,
-                        width: 300,
-                        child: Text("رابط صفحة النتائج :" + "zxcv")),
-                  ]),
-                  Row(
-                    children: [
-                      Text(
-                        "الفرع",
-                        style: TextStyle(fontSize: 35, color: green),
-                      ),
-                    ],
-                  ),
-                  // branch number =============================================
-                  Row(children: [
-                    Expanded(
+                      child: Text("الرقم الوضيفي: " + "zxc")),
+                  //Spacer(),
+                  Container(
                       //color: darkgray,
-                      // padding: EdgeInsets.all(10),
-                      // height: 70,
-                      // width: 600,
-                      child: Container(height: 70, child: Text("data")),
-                    ),
-                  ]),
+                      padding: EdgeInsets.all(10),
+                      height: 40,
+                      width: 300,
+                      child: Text("kind ")),
+                  // Container(
+                  //   padding: EdgeInsets.all(10),
+                  //   height: 70,
+                  //   width: 300,
+                  //   child: Text(
+                  //     "كلمة المرور",
+                  //     style: TextStyle(fontSize: 35, color: green),
+                  //   ),
+                  // ),
+                  // passwords =========================================
+                  Container(
+                      //color: darkgray,
+                      padding: EdgeInsets.all(10),
+                      height: 40,
+                      width: 300,
+                      child: Text("كلمة المرور :" + "kjhkj")),
+                  // Spacer(),
+                  // Container(
+                  //   //color: darkgray,
+                  //   padding: EdgeInsets.all(10),
+                  //   height: 40,
+                  //   width: 300,
+                  //   child: Text(""),
+                  // ),
+                  // Container(
+                  //   padding: EdgeInsets.all(10),
+                  //   height: 70,
+                  //   width: 300,
+                  //   child: Text(
+                  //     "التقييم",
+                  //     style: TextStyle(fontSize: 35, color: green),
+                  //   ),
+                  // ),
+                  // http reveiw and results ========================================
+                  Container(
+                      //color: darkgray,
+                      padding: EdgeInsets.all(10),
+                      height: 40,
+                      width: 300,
+                      child: Text("رابط صفحة التقييم :" + "ghfgh")),
+                  //Spacer(),
+                  Container(
+                      //color: darkgray,
+                      padding: EdgeInsets.all(10),
+                      height: 40,
+                      width: 300,
+                      child: Text("رابط صفحة النتائج :" + "zxcv")),
+                  // Container(
+                  //   padding: EdgeInsets.all(10),
+                  //   height: 70,
+                  //   width: 300,
+                  //   child: Text(
+                  //     "الفرع",
+                  //     style: TextStyle(fontSize: 35, color: green),
+                  //   ),
+                  // ),
+                  // branch number =============================================
+                  Container(
+                    //color: darkgray,
+                    padding: EdgeInsets.all(10),
+                    height: 40,
+                    width: 300,
+                    child: Text("data"),
+                  ),
                   Container(
                     height: 50,
                   ),
                   // actions ================================
                   Row(
                     children: [
-                      // Padding(
-                      //   padding: const EdgeInsets.all(8.0),
-                      //   child: FlatButton(
-                      //     height: 59,
-                      //     onPressed: () {
-                      //       _actionperformed(context);
-                      //     },
-                      //     child: Row(
-                      //       mainAxisSize: MainAxisSize.min,
-                      //       children: [
-                      //         Text(
-                      //           "اضافه",
-                      //           style: TextStyle(color: Colors.white),
-                      //         ),
-                      //         Icon(Icons.add, color: Colors.white)
-                      //       ],
-                      //     ),
-                      //     color: green,
-                      //   ),
-                      // ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: FlatButton(
@@ -673,102 +658,106 @@ class UserPage extends ConsumerWidget {
                   child: Container(
                 margin: EdgeInsets.all(20),
                 // padding: EdgeInsets.all(20),
-                child: GridView.count(
-                  crossAxisCount: w <= 600
-                      ? 2
-                      : w <= 800
-                          ? 3
-                          : w <= 1100
-                              ? 4
-                              : w <= 1500
-                                  ? 5
-                                  : 6,
-                  children: [
-                    InkWell(
-                        onTap: () {
-                          _showEmployeeDialog(context);
-                          print("object");
-                        },
-                        child: Item()),
-                    InkWell(
-                        onTap: () {
-                          _showEmployeeDialog(context);
-                          print("object");
-                        },
-                        child: Item()),
-                    InkWell(
-                        onTap: () {
-                          _showEmployeeDialog(context);
-                          print("object");
-                        },
-                        child: Item()),
-                    InkWell(
-                        onTap: () {
-                          _showEmployeeDialog(context);
-                          print("object");
-                        },
-                        child: Item()),
-                    InkWell(
-                        onTap: () {
-                          _showEmployeeDialog(context);
-                          print("object");
-                        },
-                        child: Item()),
-                    InkWell(
-                        onTap: () {
-                          _showEmployeeDialog(context);
-                          print("object");
-                        },
-                        child: Item()),
-                    InkWell(
-                        onTap: () {
-                          _showEmployeeDialog(context);
-                          print("object");
-                        },
-                        child: Item()),
-                    InkWell(
-                        onTap: () {
-                          _showEmployeeDialog(context);
-                          print("object");
-                        },
-                        child: Item()),
-                    InkWell(
-                        onTap: () {
-                          _showEmployeeDialog(context);
-                          print("object");
-                        },
-                        child: Item()),
-                    InkWell(
-                        onTap: () {
-                          _showEmployeeDialog(context);
-                          print("object");
-                        },
-                        child: Item()),
-                    InkWell(
-                        onTap: () {
-                          _showEmployeeDialog(context);
-                          print("object");
-                        },
-                        child: Item()),
-                    InkWell(
-                        onTap: () {
-                          _showEmployeeDialog(context);
-                          print("object");
-                        },
-                        child: Item()),
-                    InkWell(
-                        onTap: () {
-                          _showEmployeeDialog(context);
-                          print("object");
-                        },
-                        child: Item()),
-                    InkWell(
-                        onTap: () {
-                          _showEmployeeDialog(context);
-                          print("object");
-                        },
-                        child: Item()),
-                  ],
+                child: SingleChildScrollView(
+                  child: Center(
+                    child: Wrap(
+                      // crossAxisCount: w <= 600
+                      //     ? 2
+                      //     : w <= 800
+                      //         ? 3
+                      //         : w <= 1100
+                      //             ? 4
+                      //             : w <= 1500
+                      //                 ? 5
+                      //                 : 6,
+                      children: [
+                        InkWell(
+                            onTap: () {
+                              _showEmployeeDialog(context);
+                              print("object");
+                            },
+                            child: Item()),
+                        InkWell(
+                            onTap: () {
+                              _showEmployeeDialog(context);
+                              print("object");
+                            },
+                            child: Item()),
+                        InkWell(
+                            onTap: () {
+                              _showEmployeeDialog(context);
+                              print("object");
+                            },
+                            child: Item()),
+                        InkWell(
+                            onTap: () {
+                              _showEmployeeDialog(context);
+                              print("object");
+                            },
+                            child: Item()),
+                        InkWell(
+                            onTap: () {
+                              _showEmployeeDialog(context);
+                              print("object");
+                            },
+                            child: Item()),
+                        InkWell(
+                            onTap: () {
+                              _showEmployeeDialog(context);
+                              print("object");
+                            },
+                            child: Item()),
+                        InkWell(
+                            onTap: () {
+                              _showEmployeeDialog(context);
+                              print("object");
+                            },
+                            child: Item()),
+                        InkWell(
+                            onTap: () {
+                              _showEmployeeDialog(context);
+                              print("object");
+                            },
+                            child: Item()),
+                        InkWell(
+                            onTap: () {
+                              _showEmployeeDialog(context);
+                              print("object");
+                            },
+                            child: Item()),
+                        InkWell(
+                            onTap: () {
+                              _showEmployeeDialog(context);
+                              print("object");
+                            },
+                            child: Item()),
+                        InkWell(
+                            onTap: () {
+                              _showEmployeeDialog(context);
+                              print("object");
+                            },
+                            child: Item()),
+                        InkWell(
+                            onTap: () {
+                              _showEmployeeDialog(context);
+                              print("object");
+                            },
+                            child: Item()),
+                        InkWell(
+                            onTap: () {
+                              _showEmployeeDialog(context);
+                              print("object");
+                            },
+                            child: Item()),
+                        InkWell(
+                            onTap: () {
+                              _showEmployeeDialog(context);
+                              print("object");
+                            },
+                            child: Item()),
+                      ],
+                    ),
+                  ),
                 ),
               )),
             ],

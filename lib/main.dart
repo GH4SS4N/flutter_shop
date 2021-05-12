@@ -77,12 +77,13 @@ class MyHomePage extends ConsumerWidget {
   Widget build(BuildContext context, watch) {
     final _pageProvider = watch(pageProvider).state;
     final user = watch(userProvider).state;
-    Widget body = SignInPage();
+    Widget body; // = SignInPage();
 
     switch (user) {
       case null:
         print('oh yeah');
         //updateReminders(context);
+        body = UserPage();
         break;
 
       default:

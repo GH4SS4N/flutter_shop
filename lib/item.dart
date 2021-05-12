@@ -12,8 +12,8 @@ class Item extends StatelessWidget {
 
       //padding: const EdgeInsets.all(10),
       child: Container(
-        height: 200,
-        width: 100,
+        height: 250,
+        width: 200,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -26,6 +26,7 @@ class Item extends StatelessWidget {
               size: 50,
             ),
             Container(
+              padding: EdgeInsets.all(10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
